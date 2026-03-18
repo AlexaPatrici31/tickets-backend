@@ -14,12 +14,12 @@ import lombok.NoArgsConstructor;
 public class CategoriaIncidencia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idClasificacionIncidencia")
-    private Integer idClasificacionIncidencia;
+    @Column(name = "idCategoriaIncidencia")
+    private Integer idCategoriaIncidencia;
 
     @ManyToOne
-    @JoinColumn(name = "idClasificacionIncidencia")
-    private CategoriaIncidencia idClasificacioPadre;
+    @JoinColumn(name = "idCategoriaPadre")
+    private CategoriaIncidencia categoriaPadre;
 
     @Column(nullable = false, length = 100)
     private String nombre;
@@ -37,21 +37,20 @@ public class CategoriaIncidencia {
     @Column(nullable = false)
     private Boolean activo = true;
 
-
-    public Integer getIdClasificacionIncidencia() {
-        return idClasificacionIncidencia;
+    public Integer getIdCategoriaIncidencia() {
+        return idCategoriaIncidencia;
     }
 
-    public void setIdClasificacionIncidencia(Integer idClasificacionIncidencia) {
-        this.idClasificacionIncidencia = idClasificacionIncidencia;
+    public void setIdCategoriaIncidencia(Integer idCategoriaIncidencia) {
+        this.idCategoriaIncidencia = idCategoriaIncidencia;
     }
 
-    public CategoriaIncidencia getIdClasificacioPadre() {
-        return idClasificacioPadre;
+    public CategoriaIncidencia getCategoriaPadre() {
+        return categoriaPadre;
     }
 
-    public void setIdClasificacioPadre(CategoriaIncidencia idClasificacioPadre) {
-        this.idClasificacioPadre = idClasificacioPadre;
+    public void setCategoriaPadre(CategoriaIncidencia categoriaPadre) {
+        this.categoriaPadre = categoriaPadre;
     }
 
     public String getNombre() {

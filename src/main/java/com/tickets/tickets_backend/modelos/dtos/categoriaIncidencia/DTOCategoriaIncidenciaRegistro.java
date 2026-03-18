@@ -1,10 +1,10 @@
-package com.tickets.tickets_backend.modelos.dtos.clasificacionIncidencia;
+package com.tickets.tickets_backend.modelos.dtos.categoriaIncidencia;
 
 import com.tickets.tickets_backend.modelos.enumeraciones.NivelClasificacion;
 import lombok.Data;
 
 @Data
-public class DTOClasificacionIncidencia {
+public class DTOCategoriaIncidenciaRegistro {
     private String nombre;
     private String descripcion;
     private String colorHex;

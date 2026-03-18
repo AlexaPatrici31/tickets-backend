@@ -1,5 +1,6 @@
 package com.tickets.tickets_backend.modelos.entidades;
 
+import com.tickets.tickets_backend.modelos.enumeraciones.EstadoUsuario;
 import com.tickets.tickets_backend.modelos.enumeraciones.TipoDocumento;
 import com.tickets.tickets_backend.modelos.enumeraciones.TipoUsuario;
 import jakarta.persistence.*;
@@ -42,13 +43,13 @@ public class Usuario {
     private String numeroDocumento;
 
     @Column(nullable = false, unique = true, length = 150)
-    private String email;
+    private String correo;
 
     @Column(length = 20)
     private String telefono;
 
     @Column(nullable = false, length = 200)
-    private String claveHash;
+    private String contrasena;
 
     @Column(nullable = false, length = 500)
     private String fotoPerfilUrl;
@@ -59,8 +60,8 @@ public class Usuario {
     @Column(nullable = false)
     private LocalDateTime ultimoAcceso;
 
-    @Column(nullable = false)
-    private Boolean activo = true;
+    @Enumerated(EnumType.STRING)
+    private EstadoUsuario estado = EstadoUsuario.ACTIVO; // estado inicial
 
     public Integer getIdUsuario() {
         return idUsuario;
@@ -118,12 +119,12 @@ public class Usuario {
         this.numeroDocumento = numeroDocumento;
     }
 
-    public String getEmail() {
-        return email;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public String getTelefono() {
@@ -134,12 +135,12 @@ public class Usuario {
         this.telefono = telefono;
     }
 
-    public String getClaveHash() {
-        return claveHash;
+    public String getContrasena() {
+        return contrasena;
     }
 
-    public void setClaveHash(String claveHash) {
-        this.claveHash = claveHash;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 
     public String getFotoPerfilUrl() {
@@ -166,11 +167,11 @@ public class Usuario {
         this.ultimoAcceso = ultimoAcceso;
     }
 
-    public Boolean getActivo() {
-        return activo;
+    public EstadoUsuario getEstado() {
+        return estado;
     }
 
-    public void setActivo(Boolean activo) {
-        this.activo = activo;
+    public void setEstado(EstadoUsuario estado) {
+        this.estado = estado;
     }
 }

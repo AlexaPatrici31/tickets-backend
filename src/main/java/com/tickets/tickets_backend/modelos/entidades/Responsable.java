@@ -33,7 +33,7 @@ public class Responsable {
     @Column(nullable = false)
     private Boolean activo = true;
 
-    // 🔥 Relación con usuarios (persona o cuadrilla)
+    // Relación con usuarios (persona o cuadrilla)
     @ManyToMany
     @JoinTable(
             name = "responsable_usuario",

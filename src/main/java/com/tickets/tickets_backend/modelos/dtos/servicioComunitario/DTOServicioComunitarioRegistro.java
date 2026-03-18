@@ -1,5 +1,6 @@
 package com.tickets.tickets_backend.modelos.dtos.servicioComunitario;
 
+import com.tickets.tickets_backend.modelos.dtos.caso.DTOCasoRegistro;
 import com.tickets.tickets_backend.modelos.enumeraciones.EstadoEjecucion;
 import com.tickets.tickets_backend.modelos.enumeraciones.TipoServicio;
 import lombok.Data;
@@ -8,7 +9,7 @@ import java.time.LocalDateTime;
 
 
 @Data
-public class DTOServicioComunitarioRegistro {
+public class DTOServicioComunitarioRegistro extends DTOCasoRegistro {
     private TipoServicio tipoServicio;
     private LocalDateTime fechaSolicitud;
     private LocalDateTime fechaProgramadaInicio;

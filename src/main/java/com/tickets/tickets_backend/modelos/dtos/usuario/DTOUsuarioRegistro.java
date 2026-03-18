@@ -1,5 +1,6 @@
 package com.tickets.tickets_backend.modelos.dtos.usuario;
 
+import com.tickets.tickets_backend.modelos.enumeraciones.EstadoUsuario;
 import com.tickets.tickets_backend.modelos.enumeraciones.TipoDocumento;
 import lombok.Data;
 
@@ -11,13 +12,13 @@ public class DTOUsuarioRegistro {
     private String apellido;
     private TipoDocumento tipoDocumento;
     private String numeroDocumento;
-    private String email;
+    private String correo;
     private String telefono;
-    private String claveHash;
+    private String contrasena;
     private String fotoPerfilUrl;
     private LocalDateTime fechaRegistro;
     private LocalDateTime ultimoAcceso;
-    private boolean activo;
+    private EstadoUsuario estado = EstadoUsuario.ACTIVO;
 
     public String getNombre() {
         return nombre;
@@ -51,12 +52,12 @@ public class DTOUsuarioRegistro {
         this.numeroDocumento = numeroDocumento;
     }
 
-    public String getEmail() {
-        return email;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public String getTelefono() {
@@ -67,12 +68,12 @@ public class DTOUsuarioRegistro {
         this.telefono = telefono;
     }
 
-    public String getClaveHash() {
-        return claveHash;
+    public String getContrasena() {
+        return contrasena;
     }
 
-    public void setClaveHash(String claveHash) {
-        this.claveHash = claveHash;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 
     public String getFotoPerfilUrl() {
@@ -99,11 +100,11 @@ public class DTOUsuarioRegistro {
         this.ultimoAcceso = ultimoAcceso;
     }
 
-    public boolean isActivo() {
-        return activo;
+    public EstadoUsuario getEstado() {
+        return estado;
     }
 
-    public void setActivo(boolean activo) {
-        this.activo = activo;
+    public void setEstado(EstadoUsuario estado) {
+        this.estado = estado;
     }
 }
