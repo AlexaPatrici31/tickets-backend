@@ -12,10 +12,13 @@ public class DTOHistorialCambioEstadoRegistro {
     private String tipoAccion = "CAMBIO_ESTADO";
     private String estadoAnterior;
     private String estadoNuevo;
-    private LocalDateTime fechaCambio;
+    private String observacion;
+    private String motivo;
     private Integer idUsuarioResponsable;
     private String nombreUsuarioResponsable;
     private String emailUsuario;
+    private String datosAnteriores; // JSON
+    private String datosNuevos; // JSON
 
     public TipoEntidad getTipoEntidad() {
         return tipoEntidad;
@@ -57,12 +60,20 @@ public class DTOHistorialCambioEstadoRegistro {
         this.estadoNuevo = estadoNuevo;
     }
 
-    public LocalDateTime getFechaCambio() {
-        return fechaCambio;
+    public String getObservacion() {
+        return observacion;
     }
 
-    public void setFechaCambio(LocalDateTime fechaCambio) {
-        this.fechaCambio = fechaCambio;
+    public void setObservacion(String observacion) {
+        this.observacion = observacion;
+    }
+
+    public String getMotivo() {
+        return motivo;
+    }
+
+    public void setMotivo(String motivo) {
+        this.motivo = motivo;
     }
 
     public Integer getIdUsuarioResponsable() {
@@ -87,5 +98,21 @@ public class DTOHistorialCambioEstadoRegistro {
 
     public void setEmailUsuario(String emailUsuario) {
         this.emailUsuario = emailUsuario;
+    }
+
+    public String getDatosAnteriores() {
+        return datosAnteriores;
+    }
+
+    public void setDatosAnteriores(String datosAnteriores) {
+        this.datosAnteriores = datosAnteriores;
+    }
+
+    public String getDatosNuevos() {
+        return datosNuevos;
+    }
+
+    public void setDatosNuevos(String datosNuevos) {
+        this.datosNuevos = datosNuevos;
     }
 }

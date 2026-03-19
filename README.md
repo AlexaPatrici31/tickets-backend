@@ -70,7 +70,7 @@ La aplicación está desarrollada con Spring Boot y PostgreSQL, bajo una arquite
 
 ## Cómo empezar
 
-1. Clona este repositorio.
+1. Clona este repositorio git@github.com:AlexaPatrici31/tickets-backend.git
 2. Configura la conexión a la base de datos en el archivo de configuración `application.properties`.
 3. Crea la base de datos correspondiente en PostgreSQL.
 4. Ejecuta la aplicación.
