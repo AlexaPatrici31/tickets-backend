@@ -14,41 +14,41 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Localizacion {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idLocalizacion")
     private Integer idLocalizacion;
 
-    @Column(name = "idComunidad")
+    @Column(name = "idComunidad", nullable = false)
     private Integer idComunidad;
 
-    @ManyToOne
-    @JoinColumn(name = "idLocalizacionPadre")
-    private Localizacion localizacionPadre;
+    @Column(name = "idLocalizacionPadre")
+    private Integer localizacionPadre;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 20)
+    @Column(name = "tipoLocalizacion", nullable = false, length = 20)
     private TipoLocalizacion tipoLocalizacion;
 
-    @Column(nullable = false, length = 100)
+    @Column(name = "nombre", nullable = false, length = 100)
     private String nombre;
 
-    @Column(nullable = false, length = 150)
+    @Column(name = "direccion", nullable = false, length = 150)
     private String direccion;
 
-    @Column(nullable = false, length = 150)
+    @Column(name = "referencia", nullable = false, length = 150)
     private String referencia;
 
-    @Column(nullable = false, precision = 10, scale = 8)
+    @Column(name = "latitud", nullable = false, precision = 10, scale = 8)
     private BigDecimal latitud;
 
-    @Column(nullable = false, precision = 11, scale = 8)
+    @Column(name = "longitud", nullable = false, precision = 11, scale = 8)
     private BigDecimal longitud;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(name = "descripcion", columnDefinition = "TEXT")
     private String descripcion;
 
-    @Column(nullable = false)
+    @Column(name = "activo", nullable = false)
     private Boolean activo = true;
 
     public Integer getIdLocalizacion() {
@@ -67,11 +67,11 @@ public class Localizacion {
         this.idComunidad = idComunidad;
     }
 
-    public Localizacion getLocalizacionPadre() {
+    public Integer getLocalizacionPadre() {
         return localizacionPadre;
     }
 
-    public void setLocalizacionPadre(Localizacion localizacionPadre) {
+    public void setLocalizacionPadre(Integer localizacionPadre) {
         this.localizacionPadre = localizacionPadre;
     }
 

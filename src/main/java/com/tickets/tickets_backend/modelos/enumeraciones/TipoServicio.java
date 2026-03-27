@@ -4,6 +4,6 @@ public enum TipoServicio {
     LIMPIEZA,
     MANTENIMIENTO,
     SEGURIDAD,
-    APOYO_COMUNITARIO,
+    APOYOCOMUNITARIO,
     OTRO
 }

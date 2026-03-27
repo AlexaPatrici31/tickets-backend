@@ -17,9 +17,8 @@ public class CategoriaIncidencia {
     @Column(name = "idCategoriaIncidencia")
     private Integer idCategoriaIncidencia;
 
-    @ManyToOne
-    @JoinColumn(name = "idCategoriaPadre")
-    private CategoriaIncidencia categoriaPadre;
+    @Column(name = "idCategoriaPadre")
+    private Integer categoriaPadre;
 
     @Column(nullable = false, length = 100)
     private String nombre;
@@ -45,11 +44,11 @@ public class CategoriaIncidencia {
         this.idCategoriaIncidencia = idCategoriaIncidencia;
     }
 
-    public CategoriaIncidencia getCategoriaPadre() {
+    public Integer getCategoriaPadre() {
         return categoriaPadre;
     }
 
-    public void setCategoriaPadre(CategoriaIncidencia categoriaPadre) {
+    public void setCategoriaPadre(Integer categoriaPadre) {
         this.categoriaPadre = categoriaPadre;
     }
 

@@ -2,29 +2,21 @@ package com.tickets.tickets_backend.modelos.entidades;
 
 import com.tickets.tickets_backend.modelos.enumeraciones.TipoResponsable;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Entity
 @Table(name = "responsables")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Responsable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_responsable")
+    @Column(name = "idresponsable")
     private Integer idResponsable;
 
-    @Column(name = "id_comunidad")
+    @Column(name = "idcomunidad", nullable = false)
     private Integer idComunidad;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 20)
+    @Column(name = "tiporesponsable", nullable = false, length = 20)
     private TipoResponsable tipoResponsable;
 
     @Column(columnDefinition = "TEXT")
@@ -33,14 +25,8 @@ public class Responsable {
     @Column(nullable = false)
     private Boolean activo = true;
 
-    // Relación con usuarios (persona o cuadrilla)
-    @ManyToMany
-    @JoinTable(
-            name = "responsable_usuario",
-            joinColumns = @JoinColumn(name = "id_responsable"),
-            inverseJoinColumns = @JoinColumn(name = "id_usuario")
-    )
-    private List<Usuario> usuarios;
+    public Responsable() {
+    }
 
     public Integer getIdResponsable() {
         return idResponsable;
@@ -80,13 +66,5 @@ public class Responsable {
 
     public void setActivo(Boolean activo) {
         this.activo = activo;
-    }
-
-    public List<Usuario> getUsuarios() {
-        return usuarios;
-    }
-
-    public void setUsuarios(List<Usuario> usuarios) {
-        this.usuarios = usuarios;
     }
 }

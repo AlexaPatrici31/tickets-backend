@@ -2,21 +2,31 @@ package com.tickets.tickets_backend.configuracion;
 
 import java.util.List;
 
-public class RutasPublicas {
+public final class RutasPublicas {
 
     public static final List<String> ENDPOINTS = List.of(
-            // --- AUTHENTICACIÓN ---
+            // AUTH
             "/api/v1/auth/login",
+            "/api/v1/auth/refresh-token",
+            "/api/v1/auth/recuperar-contrasena",
+            "/api/v1/auth/restablecer-contrasena",
 
-            // --- USUARIOS ---
-            "/api/v1/usuario/listar",
+            // USUARIO
+            "/api/v1/usuario/bootstrap-admin",
+            "/api/v1/usuario/crearciudadano",
 
-            // --- ADMIN_GENERAL ---
-            "/api/v1/admin-general/registro",
-
-            // --- DOCUMENTACIÓN (SWAGGER) ---
+            // SWAGGER / OPENAPI
             "/swagger-ui/**",
             "/v3/api-docs/**",
-            "/swagger-ui.html"
+            "/swagger-ui.html",
+            "/swagger-resources/**",
+            "/webjars/**",
+            "/configuration/**",
+
+            // OTROS
+            "/error"
     );
+
+    private RutasPublicas() {
+    }
 }

@@ -3,11 +3,11 @@ package com.tickets.tickets_backend.modelos.enumeraciones;
 public enum TipoEntidad {
     CASO("Caso", "📌"),
     INCIDENCIA("Incidencia", "🚨"),
-    SERVICIO_COMUNITARIO("Servicio comunitario", "🛠️"),
+    SERVICIOCOMUNITARIO("Servicio comunitario", "🛠️"),
     USUARIO("Usuario", "👤"),
     COMUNIDAD("Comunidad", "🏘️"),
     LOCALIZACION("Localización", "📍"),
-    CHAT_CASO("Chat del caso", "💬"),
+    CHATCASO("Chat del caso", "💬"),
     ;
 
     private final String nombreLegible;
