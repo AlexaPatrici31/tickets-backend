@@ -3,7 +3,10 @@ package com.tickets.tickets_backend.servicios.comunidad;
 import com.tickets.tickets_backend.modelos.dtos.comunidad.DTOActualizarComunidadRequest;
 import com.tickets.tickets_backend.modelos.dtos.comunidad.DTOCrearComunidadRequest;
 import com.tickets.tickets_backend.modelos.entidades.Comunidad;
+import com.tickets.tickets_backend.modelos.entidades.Responsable;
 import com.tickets.tickets_backend.repositorios.ComunidadRepository;
+import com.tickets.tickets_backend.repositorios.ResponsableRepository;
+import com.tickets.tickets_backend.servicios.usuario.ServicioUsuario;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -17,9 +20,13 @@ import java.util.Map;
 public class ServicioComunidad {
 
     private final ComunidadRepository comunidadRepository;
+    private final ServicioUsuario servicioUsuario;
+    private final ResponsableRepository responsableRepository;
 
-    public ServicioComunidad(ComunidadRepository comunidadRepository) {
+    public ServicioComunidad(ComunidadRepository comunidadRepository, ServicioUsuario servicioUsuario, ResponsableRepository responsableRepository) {
         this.comunidadRepository = comunidadRepository;
+        this.servicioUsuario = servicioUsuario;
+        this.responsableRepository = responsableRepository;
     }
 
     public Map<String, Object> crear(DTOCrearComunidadRequest datos) {
@@ -91,13 +98,26 @@ public class ServicioComunidad {
 
     public Page<Map<String, Object>> obtenerUsuarios(Integer id, Pageable pageable) {
         buscarComunidad(id);
-        return new PageImpl<>(List.of(), pageable, 0);
+        return servicioUsuario.obtenerPorComunidad(id, pageable);
     }
 
     public List<Map<String, Object>> obtenerResponsables(Integer id) {
         buscarComunidad(id);
-        return List.of();
+        return responsableRepository.findByIdComunidad(id)
+                .stream()
+                .map(this::construirResponsableResponse)
+                .toList();
     }
+    private Map<String, Object> construirResponsableResponse(Responsable responsable) {
+        Map<String, Object> response = new LinkedHashMap<>();
+        response.put("idResponsable", responsable.getIdResponsable());
+        response.put("idComunidad", responsable.getIdComunidad());
+        response.put("tipoResponsable", responsable.getTipoResponsable());
+        response.put("descripcion", responsable.getDescripcion());
+        response.put("activo", responsable.getActivo());
+        return response;
+    }
+
 
     public List<Map<String, Object>> obtenerLocalizaciones(Integer id) {
         buscarComunidad(id);

@@ -3,6 +3,8 @@ package com.tickets.tickets_backend.controladores.comunidad;
 import com.tickets.tickets_backend.modelos.dtos.comunidad.DTOActualizarComunidadRequest;
 import com.tickets.tickets_backend.modelos.dtos.comunidad.DTOCrearComunidadRequest;
 import com.tickets.tickets_backend.servicios.comunidad.ServicioComunidad;
+import com.tickets.tickets_backend.servicios.responsable.ServicioResponsable;
+import com.tickets.tickets_backend.servicios.usuario.ServicioUsuario;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,9 +22,14 @@ import java.util.Map;
 public class ControladorComunidad {
 
     private final ServicioComunidad servicioComunidad;
+    private final ServicioUsuario servicioUsuario;
+    private final ServicioResponsable servicioResponsable;
 
-    public ControladorComunidad(ServicioComunidad servicioComunidad) {
+    public ControladorComunidad(ServicioComunidad servicioComunidad, ServicioUsuario servicioUsuario, ServicioResponsable servicioResponsable) {
         this.servicioComunidad = servicioComunidad;
+        this.servicioUsuario = servicioUsuario;
+        this.servicioResponsable = servicioResponsable;
+
     }
 
     @PreAuthorize("hasRole('ADMINGENERAL')")
@@ -79,8 +86,9 @@ public class ControladorComunidad {
     @GetMapping("/obtener/{id}/usuarios")
     public ResponseEntity<Page<Map<String, Object>>> obtenerUsuarios(@PathVariable Integer id,
                                                                      Pageable pageable) {
-        return ResponseEntity.ok(servicioComunidad.obtenerUsuarios(id, pageable));
+        return ResponseEntity.ok(servicioUsuario.obtenerPorComunidad(id, pageable));
     }
+
 
     @PreAuthorize("hasAnyRole('ADMINGENERAL','ADMINCOMUNIDAD')")
     @GetMapping("/obtener/{id}/responsables")
