@@ -5,7 +5,7 @@
 ---
 
 # Sistema de Gestión Comunitaria de Casos, Incidencias y Servicios  
-## TICKETS — Backend  
+# TICKETS — Backend  
 
 ![Java](https://img.shields.io/badge/Java-17-red?logo=java)
 ![Spring Boot](https://img.shields.io/badge/SpringBoot-3.x-green?logo=springboot)
