@@ -1,160 +1,205 @@
 # UNIVERSIDAD DE CARTAGENA
-
 ## INGENIERÍA DE SOFTWARE
-
 ### TRABAJO COLABORATIVO CONTEXTUALIZADO
 
 ---
 
 # Sistema de Gestión Comunitaria de Casos, Incidencias y Servicios
-
-## TICKETS
+## TICKETS — Backend
 
 ---
 
 ## Descripción
+TICKETS es una plataforma de gestión comunitaria orientada al registro, seguimiento y control de casos, incidencias y servicios dentro de una comunidad. El backend expone una API REST que permite administrar usuarios, responsables, comunidades, localizaciones, clasificaciones de incidencias, estados de caso, chats de seguimiento, historial de cambios y reportes del sistema.
 
-TICKETS es una plataforma de gestión comunitaria orientada al registro, seguimiento y control de casos, incidencias y servicios dentro de una comunidad. El sistema permite administrar usuarios, responsables, comunidades, localizaciones, clasificaciones de incidencias, estados de caso, chats de seguimiento e historial de cambios, brindando una estructura organizada para atender solicitudes y dar trazabilidad a cada proceso.
+La aplicación está desarrollada con Spring Boot y PostgreSQL, bajo una arquitectura por capas que favorece la organización del código, la mantenibilidad y la escalabilidad. Además, el modelo de datos contempla relaciones jerárquicas en módulos como localizaciones y categorías de incidencias, junto con trazabilidad completa de los cambios de estado y actividad asociada a cada caso.
 
-La aplicación está desarrollada con Spring Boot y PostgreSQL, bajo una arquitectura por capas que favorece el orden del sistema, la mantenibilidad del código y la escalabilidad del proyecto. Además, su estructura permite representar relaciones jerárquicas en módulos como localizaciones y clasificaciones de incidencias, facilitando una gestión más completa y cercana al contexto real de una comunidad.
+---
+
+## Características
+- API REST organizada por módulos funcionales.
+- Gestión de usuarios con roles y permisos diferenciados.
+- Administración de comunidades y localizaciones jerárquicas.
+- Creación y seguimiento de casos de tipo incidencia y servicio comunitario.
+- Asignación de responsables y control de carga operativa.
+- Chat por caso con mensajes públicos, internos y eventos del sistema.
+- Historial de cambios para trazabilidad de estados y acciones.
+- Módulo de reportes con métricas operativas y dashboard comunitario.
 
 ---
 
 ## Tecnologías
-
-* **Spring Boot**
-* **PostgreSQL**
-* **Java 17**
-* **Maven**
+- Java 17
+- Spring Boot
+- PostgreSQL
+- Maven
+- Spring Security + JWT
+- Spring Data JPA
+- Swagger / OpenAPI
 
 ---
 
 ## Dependencias
+Spring Boot Starters:
+- spring-boot-starter-data-jpa
+- spring-boot-starter-web
+- spring-boot-starter-security
+- spring-boot-starter-test
 
-### Spring Boot Starters
+Base de datos:
+- PostgreSQL Driver
 
-* **spring-boot-starter-data-jpa** → Manejo de base de datos con JPA.
-* **spring-boot-starter-web** → Construcción de APIs REST.
-* **spring-boot-starter-security** → Seguridad y autenticación.
-* **spring-boot-starter-test** → Pruebas unitarias e integración.
+Autenticación y JWT:
+- jjwt-api 0.11.5
+- jjwt-impl 0.11.5
+- jjwt-jackson 0.11.5
 
-### Base de datos
+Validación y documentación:
+- hibernate-validator
+- springdoc-openapi-starter-webmvc-ui
 
-* **PostgreSQL Driver** → Conector para PostgreSQL.
-
-### Autenticación y JWT
-
-* **jjwt-api 0.11.5** → API de JWT.
-* **jjwt-impl 0.11.5** (runtime) → Implementación de JWT.
-* **jjwt-jackson 0.11.5** (runtime) → Serialización y deserialización JSON.
-
-### Validación y documentación
-
-* **hibernate-validator** → Validaciones de datos.
-* **springdoc-openapi-starter-webmvc-ui** → Documentación Swagger UI.
-
-### Utilidades
-
-* **lombok** → Anotaciones para reducir código repetitivo.
-* **spring-security-test** (test) → Pruebas de seguridad.
+Utilidades:
+- lombok
+- spring-security-test
 
 ---
 
 ## Requisitos
-
-* Java 17
-* PostgreSQL
-* Maven
+- Java 17
+- PostgreSQL
+- Maven
 
 ---
 
 ## Cómo empezar
 
-1. Clona este repositorio git@github.com:AlexaPatrici31/tickets-backend.git
-2. Configura la conexión a la base de datos en el archivo de configuración `application.properties`.
-3. Crea la base de datos correspondiente en PostgreSQL.
-4. Ejecuta la aplicación.
+1. Clonar repositorio:
+   git clone git@github.com:AlexaPatrici31/tickets-backend.git
+
+2. Crear base de datos:
+   CREATE DATABASE tickets;
+
+3. Configurar application.properties:
+   spring.datasource.url=jdbc:postgresql://localhost:5432/tickets
+   spring.datasource.username=tu_usuario
+   spring.datasource.password=tu_contraseña
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+
+server.port=8080
+
+4. Ejecutar:
+   mvn spring-boot:run
+
+5. Swagger:
+   http://localhost:8080/swagger-ui/index.html
+
+---
+
+## Arquitectura
+El backend sigue una arquitectura por capas, donde cada capa cumple una responsabilidad específica y se comunica de forma controlada con las capas adyacentes.
+
+Capas:
+- Controllers: Manejan solicitudes HTTP
+- Services: Lógica de negocio
+- Repositories: Acceso a datos
+- Entities: Modelos persistentes
+- DTOs: Transporte de datos
+
+Principio aplicado:
+- Responsabilidad única (SRP)
+
+---
+
+## Roles del sistema
+
+| Rol | Descripción |
+|---|---|
+| ADMINGENERAL | Administra todo el sistema, crea comunidades y usuarios |
+| ADMINCOMUNIDAD | Administra únicamente su comunidad asignada |
+| RESPONSABLE | Atiende y gestiona los casos asignados |
+| USUARIOGENERAL | Ciudadano que reporta incidencias y solicita servicios |
+
+---
+
+## Módulos funcionales
+
+| Módulo | Endpoints |
+|---|-----------:|
+| Usuario | 23 |
+| Auth | 8 |
+| Comunidad | 15 |
+| Responsable | 12 |
+| ResponsableUsuario | 5 |
+| Localización | 13 |
+| CategoríaIncidencia | 12 |
+| EstadoCaso | 11 |
+| Caso | 24 |
+| Incidencia | 15 |
+| ServicioComunitario | 18 |
+| ChatCaso | 13 |
+| HistorialCambioEstado | 10 |
+| Reporte | 16 |
+
+Resumen:
+- Usuario y Auth: autenticación y gestión
+- Comunidad y responsables: administración operativa
+- Localización y categorías: estructuras jerárquicas
+- Casos e incidencias: núcleo funcional
+- Chat e historial: seguimiento
+- Reportes: métricas y dashboard
+
+---
+
+## Reglas de negocio
+- ADMINCOMUNIDAD no accede a otras comunidades
+- USUARIOGENERAL solo ve sus casos
+- RESPONSABLE solo gestiona sus asignaciones
+- Todo cambio genera historial y evento en chat
+- Mensajes internos no visibles para usuario general
+- bootstrap-admin se bloquea automáticamente
+- Se prioriza eliminación lógica
+
+---
+
+## Modelo de datos
+Incluye usuarios, comunidades, responsables, localizaciones, categorías, estados, casos, incidencias, servicios, chats e historial.
+
+Relaciones clave:
+- Jerarquía de localizaciones
+- Jerarquía de categorías
+- Especialización de caso
+- Asociación de chat e historial
+
+---
+
+## Endpoints destacados
+- POST /api/v1/usuario/bootstrap-admin
+- POST /api/v1/auth/login
+- POST /api/v1/incidencia/crear
+- POST /api/v1/servicio-comunitario/crear
+- PATCH /api/v1/caso/actualizar/{id}/estado
+- POST /api/v1/chat-caso/crear/{idCaso}
+- GET /api/v1/reporte/comunidad/{id}/dashboard
+
+---
+
+## Documentación API
+http://localhost:8080/swagger-ui/index.html
+
+---
+
+## Orden de implementación
+Usuarios → Auth → Comunidad → Responsables → Catálogos → Casos → Especializaciones → Chat → Historial → Reportes
 
 ---
 
 ## Información adicional
-
-Este proyecto utiliza el plugin `spring-boot-maven-plugin` para compilar y empaquetar la aplicación. Su estructura está organizada para facilitar el desarrollo de módulos relacionados con usuarios, comunidades, casos, incidencias, servicios comunitarios, chats e historial de cambios.
-
----
-
-## Principios de Diseño y Flujo de Trabajo en el Backend
-
-En este proyecto, hemos utilizado uno de los principios SOLID, específicamente el principio de responsabilidad única (SRP). Este principio establece que cada módulo o clase debe tener una única responsabilidad, es decir, debe encargarse de una sola función dentro del sistema. Esto permite construir un código más limpio, entendible y fácil de mantener.
-
-Dividimos el proyecto en varias capas para asegurar que cada una cumpla una función específica dentro del backend:
-
-* **Controladores**: Manejan las solicitudes HTTP y responden con la información necesaria.
-* **DTOs (Data Transfer Objects)**: Encapsulan los datos que se transfieren entre las distintas capas de la aplicación.
-* **Entidades**: Representan las estructuras persistentes de la base de datos.
-* **Repositorios**: Encargados de la interacción con la base de datos.
-* **Servicios**: Contienen la lógica de negocio de la aplicación.
-
----
-
-## Arquitectura por Capas
-
-El sistema TICKETS sigue una arquitectura por capas, lo que proporciona una estructura organizada y modular para el desarrollo de la aplicación. Cada capa tiene una responsabilidad específica y se comunica con las capas adyacentes de manera controlada, lo que promueve la escalabilidad, el mantenimiento y la reutilización del código.
-
-### Capas Principales:
-
-1. **Controladores (Controllers)**:
-
-* Responsabilidad: Manejar las solicitudes HTTP y las respuestas asociadas.
-* Interacción: Se comunican con los servicios para realizar operaciones de negocio y devolver los resultados adecuados a los clientes.
-
-2. **Servicios (Services)**:
-
-* Responsabilidad: Contener la lógica de negocio de la aplicación.
-* Interacción: Utilizan los repositorios para acceder a los datos persistentes y aplicar las reglas de negocio requeridas.
-
-3. **Repositorios (Repositories)**:
-
-* Responsabilidad: Encargarse de la interacción con la base de datos.
-* Interacción: Realizan operaciones de lectura y escritura en la base de datos para almacenar y recuperar la información requerida por la aplicación.
-
-4. **Entidades (Entities)**:
-
-* Responsabilidad: Representar las estructuras de datos persistentes en la base de datos.
-* Interacción: Definen los objetos de datos que se almacenan y recuperan de la base de datos, reflejando la estructura del dominio de la aplicación.
-
-5. **DTOs (Data Transfer Objects)**:
-
-* Responsabilidad: Encapsular los datos que se transfieren entre las distintas capas de la aplicación.
-* Interacción: Facilitan la comunicación entre los controladores, servicios y repositorios al transportar datos de un lugar a otro de manera eficiente y estructurada.
-
-### Beneficios:
-
-* **Separación de Responsabilidades**: Cada capa tiene una función específica, lo que facilita la comprensión y el mantenimiento del código.
-* **Escalabilidad**: La arquitectura por capas permite agregar nuevas funcionalidades de manera modular sin afectar otras partes del sistema.
-* **Reutilización del Código**: Los componentes están diseñados para ser independientes y pueden ser reutilizados en diferentes partes de la aplicación o en proyectos futuros.
-* **Facilita el Testing**: Las capas separadas permiten una mejor organización de las pruebas unitarias y de integración, lo que facilita la identificación y corrección de errores.
-
----
-
-## Módulos Funcionales de TICKETS
-
-1. **Gestión de Usuarios** → Permite registrar y administrar la información de los usuarios de la plataforma, incluyendo datos personales, acceso y estado dentro del sistema.
-2. **Gestión de Responsables** → Permite controlar los responsables asociados a la atención y seguimiento de procesos dentro de la comunidad.
-3. **Gestión de Comunidades** → Permite registrar la información general de cada comunidad, incluyendo nombre, ubicación principal y estado.
-4. **Gestión de Localizaciones** → Permite organizar ubicaciones y espacios asociados a cada comunidad, incluyendo estructuras jerárquicas de localización.
-5. **Clasificación de Incidencias** → Permite categorizar incidencias en distintos niveles, con jerarquías, descripciones e identificación visual.
-6. **Gestión de Estados de Caso** → Permite definir y controlar los estados por los que puede pasar un caso según su tipo.
-7. **Gestión de Casos** → Permite crear, consultar, actualizar y dar seguimiento a los casos registrados dentro del sistema.
-8. **Gestión de Incidencias** → Permite administrar los casos de tipo incidencia, relacionándolos con categorías, subcategorías y condiciones como el anonimato.
-9. **Gestión de Servicios Comunitarios** → Permite registrar y controlar solicitudes de servicios dentro de la comunidad, junto con su programación y ejecución.
-10. **Chat de Casos** → Permite mantener comunicación asociada a cada caso mediante mensajes, seguimiento e intercambio de información.
-11. **Historial de Cambios** → Permite registrar la trazabilidad de acciones, cambios de estado y responsables involucrados en los diferentes procesos del sistema.
+Este backend es el núcleo del sistema TICKETS, integrable con frontend móvil, con JWT, control por roles, trazabilidad y análisis de datos.
 
 ---
 
 ## Créditos
-
-Proyecto desarrollado como parte del **Trabajo Colaborativo Contextualizado** del Programa de **Ingeniería de Software** de la **Universidad de Cartagena**.
-
----
+Proyecto desarrollado como parte del Trabajo Colaborativo Contextualizado del Programa de Ingeniería de Software de la Universidad de Cartagena.

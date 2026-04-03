@@ -7,4 +7,20 @@ import lombok.Data;
 public class DTOIncidenciaRegistro extends DTOCasoRegistro {
     private Integer idCategoria;
     private Integer idSubcategoria;
+
+    public Integer getIdCategoria() {
+        return idCategoria;
+    }
+
+    public void setIdCategoria(Integer idCategoria) {
+        this.idCategoria = idCategoria;
+    }
+
+    public Integer getIdSubcategoria() {
+        return idSubcategoria;
+    }
+
+    public void setIdSubcategoria(Integer idSubcategoria) {
+        this.idSubcategoria = idSubcategoria;
+    }
 }

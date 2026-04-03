@@ -4,27 +4,31 @@ import com.tickets.tickets_backend.modelos.enumeraciones.Prioridad;
 import com.tickets.tickets_backend.modelos.enumeraciones.TipoArchivoAdjunto;
 import com.tickets.tickets_backend.modelos.enumeraciones.TipoCaso;
 import lombok.Data;
-
 import java.time.LocalDateTime;
 
 @Data
 public class DTOCasoRegistro {
-     private TipoCaso tipoCaso;
-     private String codigo;
-     private Prioridad prioridad;
-     private String titulo;
-     private String descripcion;
-     private LocalDateTime fechaCreacion;
-     private LocalDateTime fechaPrimerRespuesta;
-     private LocalDateTime fechaAsignacion;
-     private LocalDateTime fechaUltimaActualizacion;
-     private LocalDateTime fechaCierre;
-     private Boolean visibleComunidad;
-     private TipoArchivoAdjunto tipoArchivoAdjunto;
-     private String urlAdjunto;
-     private String nombreAdjunto;
-     private LocalDateTime fechaAdjunto;
-     private Boolean activo;
+    private TipoCaso tipoCaso;
+    private String codigo;
+    private Integer idComunidad;
+    private Integer idUsuarioSolicitante;
+    private Integer idEstadoCasoActual;
+    private Integer idUbicacion;
+    private Integer idResponsableActual;
+    private Prioridad prioridad;
+    private String titulo;
+    private String descripcion;
+    private LocalDateTime fechaCreacion;
+    private LocalDateTime fechaPrimerRespuesta;
+    private LocalDateTime fechaAsignacion;
+    private LocalDateTime fechaUltimaActualizacion;
+    private LocalDateTime fechaCierre;
+    private Boolean visibleComunidad;
+    private TipoArchivoAdjunto tipoArchivoAdjunto;
+    private String urlAdjunto;
+    private String nombreAdjunto;
+    private LocalDateTime fechaAdjunto;
+    private Boolean activo;
 
     public TipoCaso getTipoCaso() {
         return tipoCaso;
@@ -40,6 +44,46 @@ public class DTOCasoRegistro {
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
+    }
+
+    public Integer getIdComunidad() {
+        return idComunidad;
+    }
+
+    public void setIdComunidad(Integer idComunidad) {
+        this.idComunidad = idComunidad;
+    }
+
+    public Integer getIdUsuarioSolicitante() {
+        return idUsuarioSolicitante;
+    }
+
+    public void setIdUsuarioSolicitante(Integer idUsuarioSolicitante) {
+        this.idUsuarioSolicitante = idUsuarioSolicitante;
+    }
+
+    public Integer getIdEstadoCasoActual() {
+        return idEstadoCasoActual;
+    }
+
+    public void setIdEstadoCasoActual(Integer idEstadoCasoActual) {
+        this.idEstadoCasoActual = idEstadoCasoActual;
+    }
+
+    public Integer getIdUbicacion() {
+        return idUbicacion;
+    }
+
+    public void setIdUbicacion(Integer idUbicacion) {
+        this.idUbicacion = idUbicacion;
+    }
+
+    public Integer getIdResponsableActual() {
+        return idResponsableActual;
+    }
+
+    public void setIdResponsableActual(Integer idResponsableActual) {
+        this.idResponsableActual = idResponsableActual;
     }
 
     public Prioridad getPrioridad() {
